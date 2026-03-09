@@ -1,6 +1,4 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import { startPageTracking } from "discourse/lib/page-tracker";
-import { viewTrackingRequired } from "discourse/lib/ajax";
 import GuestGateModal from "../components/modal/guest-gate";
 import { cleanupLightboxes } from "discourse/lib/lightbox";
 
@@ -35,29 +33,19 @@ export default {
           });
         }
       } else {
-        let pageView = 0;
-        // Tell our AJAX system to track a page transition
         const router = container.lookup("router:main");
-        router.on("routeWillChange", viewTrackingRequired);
 
-        const appEvents = container.lookup("service:app-events");
-        startPageTracking(router, appEvents);
-        let gateShownOnce = false;
+        let isBot = false;
+        let re = new RegExp(botPattern, "i");
+        if (re.test(navigator.userAgent)) {
+          isBot = true;
+        }
 
-
-        appEvents.on("page:changed", data => {
-          
+        const shouldShowOnPath = () => {
           const path = router.currentURL;
-          
           let urlShowMatch;
           let urlHideMatch;
 
-          let isBot = false;
-          let re = new RegExp(botPattern, "i");
-          if (re.test(navigator.userAgent)) {
-            isBot = true;
-          }
-          
           if (settings.url_for_show.length) {
             const allowedPaths = settings.url_for_show.split("|");
             urlShowMatch = allowedPaths.some((allowedPath) => {
@@ -67,38 +55,25 @@ export default {
               return path === allowedPath;
             });
           }
-          
+
           if (settings.url_for_hide.length) {
             const disallowedPaths = settings.url_for_hide.split("|");
-            urlHideMatch = disallowedPaths.some((disallowedPaths) => {
-              if(disallowedPaths.slice(-1) === "*") {
-                return path.indexOf(disallowedPaths.slice(0, -1)) === 0;
+            urlHideMatch = disallowedPaths.some((disallowedPath) => {
+              if(disallowedPath.slice(-1) === "*") {
+                return path.indexOf(disallowedPath.slice(0, -1)) === 0;
               }
-              return path === disallowedPaths;
+              return path === disallowedPath;
             });
           }
-            
-          const maxViews = parseInt(settings.max_guest_topic_views);
-          pageView++;     
-          const hitMaxViews = pageView >= maxViews;
-          const showGateBool = urlShowMatch && !urlHideMatch && hitMaxViews && !isBot && !gateShownOnce;
-            
-          if (showGateBool) {
-            if (settings.gate_show_only_once) {
-              gateShownOnce = true;
-            }
-            pageView = getRandomInt(0, maxViews + 1);
-                
-            modal.show(GuestGateModal);
-          }
-        });
+
+          return urlShowMatch && !urlHideMatch;
+        };
+
+        // Show the gate immediately for anonymous non-bot users on allowed paths
+        if (!isBot && shouldShowOnPath()) {
+          modal.show(GuestGateModal);
+        }
       }
     });
   }
 };
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
