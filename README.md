@@ -1,4 +1,8 @@
-## Guest Gate Theme Component
+## sparQ Guest Gate Theme Component
+
+### sparQ's changes
+
+Most of the changes to this theme component  are to create a gate for a specific post and to hide the post content.
 
 **[See the theme component discussion here on Discourse](https://meta.discourse.org/t/guest-gate-theme-component/225107)**
 

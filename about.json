@@ -1,9 +1,9 @@
 {
-  "name": "Guest Gate Theme Component",
+  "name": "sparQ Beta Tester Forum Guest Gate Theme Component",
   "component": true,
   "license_url": null,
-  "about_url": "https://github.com/VaperinaDEV/discourse-guest-gate-theme-component",
-  "authors": "Vinoth Kannan (vinothkannan@vinkas.com) and jgujgu and michael@discoursehosting.com",
+  "about_url": "https://github.com/sparQone/sparQ-discourse-guest-gate",
+  "authors": "Vinoth Kannan (vinothkannan@vinkas.com) and jgujgu and michael@discoursehosting.com and jwhuettl",
   "theme_version": null,
   "minimum_discourse_version": null,
   "maximum_discourse_version": null,
