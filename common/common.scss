@@ -1,3 +1,12 @@
+// Blur page content behind the guest gate modal
+body.has-guest-gate {
+  #main-outlet {
+    filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
 .d-modal.gate {
   .d-modal__container {
     max-width: 700px;

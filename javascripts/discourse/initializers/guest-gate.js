@@ -23,7 +23,8 @@ export default {
       if (settings.gate_show_when_thumbnail_clicked) {
         if (this.siteSettings.enable_experimental_lightbox) {
           // New lightbox
-          api.onAppEvent('lightbox:opened', () => {            
+          api.onAppEvent('lightbox:opened', () => {
+            document.body.classList.add("has-guest-gate");
             modal.show(GuestGateModal);
             cleanupLightboxes();
           });
@@ -77,6 +78,7 @@ export default {
           const showGateBool = urlShowMatch && !urlHideMatch && !isBot;
 
           if (showGateBool) {
+            document.body.classList.add("has-guest-gate");
             modal.show(GuestGateModal);
           }
         });
