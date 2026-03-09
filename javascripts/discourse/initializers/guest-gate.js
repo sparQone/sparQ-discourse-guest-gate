@@ -1,4 +1,6 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
+import { startPageTracking } from "discourse/lib/page-tracker";
+import { viewTrackingRequired } from "discourse/lib/ajax";
 import GuestGateModal from "../components/modal/guest-gate";
 import { cleanupLightboxes } from "discourse/lib/lightbox";
 
@@ -34,6 +36,10 @@ export default {
         }
       } else {
         const router = container.lookup("router:main");
+        router.on("routeWillChange", viewTrackingRequired);
+
+        const appEvents = container.lookup("service:app-events");
+        startPageTracking(router, appEvents);
 
         let isBot = false;
         let re = new RegExp(botPattern, "i");
@@ -41,8 +47,10 @@ export default {
           isBot = true;
         }
 
-        const shouldShowOnPath = () => {
+        // Show the gate immediately on the first page load
+        appEvents.on("page:changed", () => {
           const path = router.currentURL;
+
           let urlShowMatch;
           let urlHideMatch;
 
@@ -66,13 +74,12 @@ export default {
             });
           }
 
-          return urlShowMatch && !urlHideMatch;
-        };
+          const showGateBool = urlShowMatch && !urlHideMatch && !isBot;
 
-        // Show the gate immediately for anonymous non-bot users on allowed paths
-        if (!isBot && shouldShowOnPath()) {
-          modal.show(GuestGateModal);
-        }
+          if (showGateBool) {
+            modal.show(GuestGateModal);
+          }
+        });
       }
     });
   }
