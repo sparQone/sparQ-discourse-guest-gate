@@ -54,6 +54,11 @@ export default class GuestGateModal extends Component {
     return I18n.t(themePrefix("guest_gate.or"));
   }
 
+  willDestroy() {
+    super.willDestroy(...arguments);
+    document.body.classList.remove("has-guest-gate");
+  }
+
   @action
   externalLogin(provider) {
     // we will automatically redirect to the external auth service

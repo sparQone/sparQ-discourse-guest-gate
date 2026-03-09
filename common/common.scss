@@ -8,11 +8,6 @@ body.has-guest-gate {
 }
 
 .d-modal.gate {
-  .d-modal__container {
-    max-width: 700px;
-    width: 90vw;
-    min-height: 50vh;
-  }
   // if custom gate enabled
   &.custom-gate {
     .d-modal__container {

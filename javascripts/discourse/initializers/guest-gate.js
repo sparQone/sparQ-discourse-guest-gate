@@ -31,6 +31,7 @@ export default {
         } else {
           // Old lightbox
           $("body").on("click", "a.lightbox", function() {
+            document.body.classList.add("has-guest-gate");
             modal.show(GuestGateModal);
             $.magnificPopup.instance.close();
           });
