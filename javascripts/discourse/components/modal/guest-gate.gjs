@@ -111,24 +111,24 @@ export default class GuestGateModal extends Component {
                 @class={{settings.signup_button_style}}
                 @icon={{settings.signup_icon}}
                 @translatedLabel={{this.guestGateSsoSignup}}
-                @href={{settings.discourse_connect_signup_url}}
+                @href="https://forum.sparqone.com/session/sso?return_path=/t/sparq-1-0-beta-release/17"
               />
             {{/if}}
-            
+
           {{else}}
-            
+
             <DButton
               @class="btn-transparent"
               @translatedLabel={{this.guestGateSsoLogin}}
               @action={{routeAction "showLogin"}}
             />
-    
+
             {{#if settings.enable_discourse_connect_signup}}
               {{this.guestGateOr}}
               <DButton
                 @class="btn-transparent"
                 @translatedLabel={{this.guestGateSsoSignup}}
-                @href={{settings.discourse_connect_signup_url}}
+                @href="https://forum.sparqone.com/session/sso?return_path=/t/sparq-1-0-beta-release/17"
               />
             {{/if}}
           {{/if}}
@@ -147,11 +147,11 @@ export default class GuestGateModal extends Component {
                 @class={{settings.signup_button_style}}
                 @icon={{settings.signup_icon}}
                 @translatedLabel={{this.guestGateSignup}}
-                @href={{settings.custom_signup_url}}
+                @href="https://forum.sparqone.com/session/sso?return_path=/t/sparq-1-0-beta-release/17"
               />
-              
+
             {{else}}
-              
+
               <DButton
                 @class={{settings.login_button_style}}
                 @icon={{settings.login_icon}}
@@ -162,7 +162,7 @@ export default class GuestGateModal extends Component {
                 @class={{settings.signup_button_style}}
                 @icon={{settings.signup_icon}}
                 @translatedLabel={{this.guestGateSignup}}
-                @action={{routeAction "showCreateAccount"}}
+                @href="https://forum.sparqone.com/session/sso?return_path=/t/sparq-1-0-beta-release/17"
               />
             {{/if}}
                 
@@ -180,23 +180,23 @@ export default class GuestGateModal extends Component {
               <DButton
                 @class="btn-transparent"
                 @translatedLabel={{this.guestGateSignup}}
-                @href={{settings.custom_signup_url}}
+                @href="https://forum.sparqone.com/session/sso?return_path=/t/sparq-1-0-beta-release/17"
               />
-                  
+
             {{else}}
-                
+
               <DButton
                 @class="btn-transparent"
                 @translatedLabel={{this.guestGateLogin}}
                 @action={{routeAction "showLogin"}}
               />
-    
+
               {{this.guestGateOr}}
-    
+
               <DButton
                 @class="btn-transparent"
                 @translatedLabel={{this.guestGateSignup}}
-                @action={{routeAction "showCreateAccount"}}
+                @href="https://forum.sparqone.com/session/sso?return_path=/t/sparq-1-0-beta-release/17"
               />
             {{/if}}
           {{/if}}
