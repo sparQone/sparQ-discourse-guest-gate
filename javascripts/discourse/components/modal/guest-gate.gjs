@@ -65,6 +65,11 @@ export default class GuestGateModal extends Component {
     this.login.externalLogin(provider, { signup: true });
   }
 
+  @action
+  redirectToSso() {
+    window.location.href = "/session/sso?return_path=/t/sparq-1-0-beta-release/17";
+  }
+
   <template>
     <DModal
       @closeModal={{@closeModal}}
@@ -104,14 +109,14 @@ export default class GuestGateModal extends Component {
               @class={{settings.login_button_style}}
               @icon={{settings.login_icon}}
               @translatedLabel={{this.guestGateSsoLogin}}
-              @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+              @action={{this.redirectToSso}}
             />
             {{#if settings.enable_discourse_connect_signup}}
               <DButton
                 @class={{settings.signup_button_style}}
                 @icon={{settings.signup_icon}}
                 @translatedLabel={{this.guestGateSsoSignup}}
-                @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+                @action={{this.redirectToSso}}
               />
             {{/if}}
 
@@ -120,7 +125,7 @@ export default class GuestGateModal extends Component {
             <DButton
               @class="btn-transparent"
               @translatedLabel={{this.guestGateSsoLogin}}
-              @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+              @action={{this.redirectToSso}}
             />
 
             {{#if settings.enable_discourse_connect_signup}}
@@ -128,7 +133,7 @@ export default class GuestGateModal extends Component {
               <DButton
                 @class="btn-transparent"
                 @translatedLabel={{this.guestGateSsoSignup}}
-                @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+                @action={{this.redirectToSso}}
               />
             {{/if}}
           {{/if}}
@@ -141,13 +146,13 @@ export default class GuestGateModal extends Component {
                 @class={{settings.login_button_style}}
                 @icon={{settings.login_icon}}
                 @translatedLabel={{this.guestGateLogin}}
-                @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+                @action={{this.redirectToSso}}
               />
               <DButton
                 @class={{settings.signup_button_style}}
                 @icon={{settings.signup_icon}}
                 @translatedLabel={{this.guestGateSignup}}
-                @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+                @action={{this.redirectToSso}}
               />
 
             {{else}}
@@ -156,13 +161,13 @@ export default class GuestGateModal extends Component {
                 @class={{settings.login_button_style}}
                 @icon={{settings.login_icon}}
                 @translatedLabel={{this.guestGateLogin}}
-                @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+                @action={{this.redirectToSso}}
               />
               <DButton
                 @class={{settings.signup_button_style}}
                 @icon={{settings.signup_icon}}
                 @translatedLabel={{this.guestGateSignup}}
-                @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+                @action={{this.redirectToSso}}
               />
             {{/if}}
                 
@@ -172,7 +177,7 @@ export default class GuestGateModal extends Component {
               <DButton
                 @class="btn-transparent"
                 @translatedLabel={{this.guestGateLogin}}
-                @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+                @action={{this.redirectToSso}}
               />
 
               {{this.guestGateOr}}
@@ -180,7 +185,7 @@ export default class GuestGateModal extends Component {
               <DButton
                 @class="btn-transparent"
                 @translatedLabel={{this.guestGateSignup}}
-                @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+                @action={{this.redirectToSso}}
               />
 
             {{else}}
@@ -188,7 +193,7 @@ export default class GuestGateModal extends Component {
               <DButton
                 @class="btn-transparent"
                 @translatedLabel={{this.guestGateLogin}}
-                @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+                @action={{this.redirectToSso}}
               />
 
               {{this.guestGateOr}}
@@ -196,7 +201,7 @@ export default class GuestGateModal extends Component {
               <DButton
                 @class="btn-transparent"
                 @translatedLabel={{this.guestGateSignup}}
-                @href="/session/sso?return_path=/t/sparq-1-0-beta-release/17"
+                @action={{this.redirectToSso}}
               />
             {{/if}}
           {{/if}}
