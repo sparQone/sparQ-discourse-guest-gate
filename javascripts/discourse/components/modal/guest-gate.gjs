@@ -8,6 +8,7 @@ import replaceEmoji from "discourse/helpers/replace-emoji";
 import DButton from "discourse/components/d-button";
 import DModal from "discourse/components/d-modal";
 import LoginButtons from "discourse/components/login-buttons";
+import DiscourseURL from "discourse/lib/url";
 import I18n from "discourse-i18n";
 
 export default class GuestGateModal extends Component {  
@@ -67,7 +68,7 @@ export default class GuestGateModal extends Component {
 
   @action
   redirectToSso() {
-    window.location.href = "/session/sso?return_path=/t/sparq-1-0-beta-release/17";
+    DiscourseURL.redirectTo("/session/sso?return_path=/t/sparq-1-0-beta-release/17");
   }
 
   <template>
